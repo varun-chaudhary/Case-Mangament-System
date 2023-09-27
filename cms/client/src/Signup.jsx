@@ -70,9 +70,9 @@ function Signup() {
                 />
             </div>
             <button className="login-btn" type="submit">SIGN UP</button>
-            {/* <div className="create">
+            <div className="create">
                 <Link to="/login">Already have an account? Login here.</Link>
-            </div> */}
+            </div>
         </div>
         </div>
     </form>

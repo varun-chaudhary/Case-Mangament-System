@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
 import './Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+  const nav=useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-
-    // Here, you can handle the form submission, e.g., send the data to a server or perform validation.
-    // For this example, we'll simply log the form data.
-    console.log('Username:', username);
-    console.log('Password:', password);
+    e.preventDefault();
+    axios
+      .post('http://127.0.0.1:3000/login', { email, pass})
+      .then((res) => {
+        console.log(res);
+        if (res.data === "Success") {
+          // console.log("hogya login");
+          nav('/home');
+        } else if (res.data === "The password is incorrect") {
+          alert(res.data);
+        } else if (res.data === "User does not exist") {
+          alert(res.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -30,9 +44,9 @@ function Login() {
             <i className="ri-user-fill"></i>
             <input
               type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Email"
+              value={email} // Change from `username` to `email`
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="text-input">
@@ -40,15 +54,15 @@ function Login() {
             <input
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
             />
           </div>
           <button className="login-btn" type="submit">
             LOGIN
           </button>
           <a href="#" className="forgot">
-            Forgot Username/Password?
+            Forgot UserId/Password?
           </a>
           <div className="create">
             <Link to="/register">Create Account</Link>

@@ -7,6 +7,6 @@ const UserSchema = new mongoose.Schema({
     pass: String
 });
 
-const User = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('User', UserSchema);
 
-module.exports = User; // Export the User model
+module.exports = UserModel; // Export the User model
