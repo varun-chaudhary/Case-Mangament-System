@@ -102,8 +102,12 @@ body {
     margin: 5px 0;
 }
 
-.text-input input {
+.text-input input,select{
     background: none;
+    color: hwb(0 60% 40%);
+
+
+
     border: none;
     outline: none;
     width: 100%;
